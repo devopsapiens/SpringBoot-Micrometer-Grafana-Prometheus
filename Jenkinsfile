@@ -1,19 +1,6 @@
 pipeline {
+
     agent any
-    environment {
-        branch = 'master'
-        scmUrl = 'ssh://git@myScmServer.com/repos/myRepo.git'
-        serverPort = '8080'
-        developmentServer = 'dev-myproject.mycompany.com'
-        stagingServer = 'staging-myproject.mycompany.com'
-        productionServer = 'production-myproject.mycompany.com'
-    }
-    stages {
-        stage('checkout git') {
-            steps {
-                git branch: branch, credentialsId: 'GitCredentials', url: scmUrl
-            }
-        }
 
         stage('build') {
             steps {
@@ -53,4 +40,6 @@ pipeline {
             mail to: 'team@example.com', subject: 'Pipeline failed', body: "${env.BUILD_URL}"
         }
     }
+
+}
 }
